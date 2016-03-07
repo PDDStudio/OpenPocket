@@ -36,6 +36,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
+        //TODO: // FIXME: 07.03.16 crash when trying to return page title
         return overviewFragments[position].getMonth().getMonthName();
     }
 }

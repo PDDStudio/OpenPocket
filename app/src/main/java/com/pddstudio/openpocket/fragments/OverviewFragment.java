@@ -63,7 +63,7 @@ public class OverviewFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(fastItemAdapter);
-        
+
     }
 
 }
