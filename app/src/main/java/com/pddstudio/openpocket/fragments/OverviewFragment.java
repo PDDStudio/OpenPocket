@@ -7,16 +7,24 @@ package com.pddstudio.openpocket.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.pddstudio.openpocket.R;
 import com.pddstudio.pocketlibrary.enums.Month;
 
+import io.inject.InjectView;
 import io.inject.Injector;
 
 public class OverviewFragment extends Fragment {
+
+    @InjectView(R.id.recyclerView) private RecyclerView recyclerView;
+    private FastItemAdapter fastItemAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     public OverviewFragment() {}
 
@@ -49,6 +57,13 @@ public class OverviewFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Injector.inject(this, view);
+        //setup the fragment
+        layoutManager = new LinearLayoutManager(getContext());
+        fastItemAdapter = new FastItemAdapter();
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(fastItemAdapter);
+        
     }
 
 }
