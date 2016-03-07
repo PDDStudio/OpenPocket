@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pddstudio.openpocket.R;
+import com.pddstudio.pocketlibrary.enums.Month;
 
 import io.inject.Injector;
 
@@ -19,9 +20,29 @@ public class OverviewFragment extends Fragment {
 
     public OverviewFragment() {}
 
+    public static OverviewFragment newInstance(Month month) {
+        OverviewFragment overviewFragment = new OverviewFragment();
+        Bundle args = new Bundle();
+        args.putString("Month", month.name());
+        overviewFragment.setArguments(args);
+        return overviewFragment;
+    }
+
+    private Month month;
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstance) {
         return layoutInflater.inflate(R.layout.fragment_overview, viewGroup, false);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        month = Month.valueOf(getArguments().getString("Month"));
+    }
+
+    public Month getMonth() {
+        return month;
     }
 
     @Override
