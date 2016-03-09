@@ -7,18 +7,21 @@ package com.pddstudio.openpocket.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.LayoutInflaterCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
-import com.mikepenz.iconics.context.IconicsLayoutInflater;
 import com.pddstudio.openpocket.R;
+import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.enums.Month;
+import com.pddstudio.pocketlibrary.models.Transaction;
+import com.pddstudio.pocketutils.DateUtils;
+
+import java.util.List;
 
 import io.inject.InjectView;
 import io.inject.Injector;
@@ -28,8 +31,7 @@ public class OverviewFragment extends Fragment {
     @InjectView(R.id.recyclerView) private RecyclerView recyclerView;
     private FastItemAdapter fastItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    //TODO: add lookup functionality as soon as it is implemented in backend
-    private boolean recordsFound = false;
+    private List<Transaction> transactions;
 
     public OverviewFragment() {}
 
@@ -45,7 +47,7 @@ public class OverviewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstance) {
-        return recordsFound ?
+        return transactions.size() > 0 ?
                 layoutInflater.inflate(R.layout.fragment_overview, viewGroup, false) :
                 layoutInflater.inflate(R.layout.fragment_overview_empty, viewGroup, false);
     }
@@ -54,6 +56,8 @@ public class OverviewFragment extends Fragment {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         monthName = getArguments().getString("monthName");
+        transactions = OpenPocket.get().getTransactionManager().getFilteredTransactionList(DateUtils.getValueForMonth(monthName), DateUtils.getCurrentYear());
+        Log.d("OverviewFragment", "Month: " + monthName + " | Transaction List: " + transactions.size());
     }
 
     public String getMonthName() {
@@ -65,7 +69,7 @@ public class OverviewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Injector.inject(this, view);
         //setup the fragment
-        if(recordsFound) {
+        if(transactions.size() > 0) {
             layoutManager = new LinearLayoutManager(getContext());
             fastItemAdapter = new FastItemAdapter();
             recyclerView.setHasFixedSize(true);
