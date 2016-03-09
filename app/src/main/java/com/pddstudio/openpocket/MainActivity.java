@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
             accountHeader.addProfiles(profileDrawerItem);
         }
 
-        drawer = new DrawerBuilder(this)
+        drawer = new DrawerBuilder()
+                .withActivity(this)
                 .withToolbar(toolbar)
                 .withSavedInstance(savedInstance)
                 .withActionBarDrawerToggleAnimated(true)
