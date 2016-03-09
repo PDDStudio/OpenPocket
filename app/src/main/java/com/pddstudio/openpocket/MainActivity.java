@@ -1,5 +1,6 @@
 package com.pddstudio.openpocket;
 
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,12 @@ import io.inject.Injector;
 
 public class MainActivity extends AppCompatActivity {
 
-    @InjectView(R.id.toolbar) private Toolbar toolbar;
+    private Toolbar toolbar;
     @InjectView(R.id.tabLayout) private TabLayout tabLayout;
     @InjectView(R.id.viewPager) private ViewPager viewPager;
 
     private Drawer drawer;
+    private AccountHeader accountHeader;
     private ViewPagerAdapter viewPagerAdapter;
 
     @Override
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //bind the views
         Injector.inject(this);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
         //initialize pocket library
@@ -48,9 +52,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //save the drawer values to restore it later if needed
+        outState = drawer.saveInstanceState(outState);
+        outState = accountHeader.saveInstanceState(outState);
+        super.onSaveInstanceState(outState);
+    }
+
     private void buildNavigationDrawer(Bundle savedInstance) {
 
-        AccountHeader accountHeader = new AccountHeaderBuilder().withActivity(this).withHeaderBackground(R.color.colorPrimary).build();
+        accountHeader = new AccountHeaderBuilder().withActivity(this).withHeaderBackground(R.color.colorPrimary).build();
 
         for(Profile profile : OpenPocket.get().getProfileManager().getProfileList()) {
             ProfileDrawerItem profileDrawerItem = new ProfileDrawerItem().withName(profile.getProfileName()).withEmail(profile.getProfileDescription());
@@ -62,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstance)
                 .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(accountHeader)
+                .withFullscreen(true)
+                .withTranslucentStatusBar(true)
+                .withTranslucentNavigationBarProgrammatically(true)
                 .build();
     }
 
