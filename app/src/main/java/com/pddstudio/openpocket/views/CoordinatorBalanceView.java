@@ -28,7 +28,7 @@ public class CoordinatorBalanceView extends LinearLayout {
     private Context mContext;
     private OnBalanceUpdateListener mUpdateListener;
     private String moneyPostFix;
-    private double mCurrentBalance = 0;
+    private float mCurrentBalance = 0;
     @ColorInt private int positiveBalanceColor;
     @ColorInt private int negativeBalanceColor;
 
@@ -70,7 +70,7 @@ public class CoordinatorBalanceView extends LinearLayout {
             @ColorInt int textColor = typedArray.getColor(R.styleable.CoordinatorBalanceView_textColor, Color.WHITE);
             this.positiveBalanceColor = typedArray.getColor(R.styleable.CoordinatorBalanceView_balancePositiveColor, Color.GREEN);
             this.negativeBalanceColor = typedArray.getColor(R.styleable.CoordinatorBalanceView_balanceNegativeColor, Color.RED);
-            this.mCurrentBalance = typedArray.getInteger(R.styleable.CoordinatorBalanceView_currentBalance, 0);
+            this.mCurrentBalance = typedArray.getFloat(R.styleable.CoordinatorBalanceView_currentBalance, 0);
 
             typedArray.recycle();
 
@@ -82,8 +82,7 @@ public class CoordinatorBalanceView extends LinearLayout {
     }
 
     private void updateBalanceText() {
-        String balance = getBalanceText().replace(moneyPostFix, "");
-        mBalanceView.setTextColor(Math.round(mCurrentBalance) < 0 ? negativeBalanceColor : positiveBalanceColor);
+        mBalanceView.setTextColor(mCurrentBalance < 0 ? negativeBalanceColor : positiveBalanceColor);
     }
 
     public void setTitleText(String titleText) {
@@ -94,7 +93,7 @@ public class CoordinatorBalanceView extends LinearLayout {
         this.mTitleView.setText(titleText);
     }
 
-    public void setCurrentBalance(double currentBalance) {
+    public void setCurrentBalance(float currentBalance) {
         this.mBalanceView.setText(currentBalance + moneyPostFix);
         updateBalanceText();
         if(mUpdateListener != null) mUpdateListener.onBalanceUpdate(currentBalance + moneyPostFix);
