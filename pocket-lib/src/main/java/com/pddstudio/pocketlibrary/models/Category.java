@@ -8,6 +8,7 @@ package com.pddstudio.pocketlibrary.models;
 public class Category {
 
     private String categoryName;
+    private String categoryDescription;
     private String categoryIcon;
 
     public Category() {}
@@ -28,4 +29,12 @@ public class Category {
         this.categoryIcon = categoryIcon;
     }
 
+    public String getCategoryDescription() {
+        return categoryDescription;
+    }
+
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
+    }
+    
 }
