@@ -6,9 +6,6 @@ package com.pddstudio.pocketlibrary;
  */
 
 import android.content.Context;
-
-import com.pddstudio.pocketlibrary.models.Profile;
-
 import io.paperdb.Paper;
 
 public final class OpenPocket {
@@ -17,11 +14,13 @@ public final class OpenPocket {
 
     private final Context context;
     private final ProfileManager profileManager;
+    private final CategoryManager categoryManager;
 
     private OpenPocket(Context context) {
         Paper.init(context);
         this.context = context;
         this.profileManager = new ProfileManager();
+        this.categoryManager = new CategoryManager();
     }
 
     public static void init(Context context) {
@@ -32,8 +31,16 @@ public final class OpenPocket {
         return openPocket;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
     public ProfileManager getProfileManager() {
         return profileManager;
+    }
+
+    public CategoryManager getCategoryManager() {
+        return categoryManager;
     }
 
 }

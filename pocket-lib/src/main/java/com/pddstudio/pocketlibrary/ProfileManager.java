@@ -14,7 +14,7 @@ import io.paperdb.Paper;
 
 public class ProfileManager {
 
-    private static final String PROFILE_LIST = "profileList";
+    private static final String PROFILE_LIST = "mProfileList";
 
     protected ProfileManager() {}
 
