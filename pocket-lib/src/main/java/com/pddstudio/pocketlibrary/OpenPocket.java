@@ -15,12 +15,14 @@ public final class OpenPocket {
     private final Context context;
     private final ProfileManager profileManager;
     private final CategoryManager categoryManager;
+    private final TransactionManager transactionManager;
 
     private OpenPocket(Context context) {
         Paper.init(context);
         this.context = context;
         this.profileManager = new ProfileManager();
         this.categoryManager = new CategoryManager();
+        this.transactionManager = new TransactionManager();
     }
 
     public static void init(Context context) {
@@ -41,6 +43,10 @@ public final class OpenPocket {
 
     public CategoryManager getCategoryManager() {
         return categoryManager;
+    }
+
+    public TransactionManager getTransactionManager() {
+        return transactionManager;
     }
 
 }
