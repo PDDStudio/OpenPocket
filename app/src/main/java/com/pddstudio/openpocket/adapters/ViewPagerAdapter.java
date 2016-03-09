@@ -14,7 +14,7 @@ import com.pddstudio.pocketlibrary.enums.Month;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    private OverviewFragment[] overviewFragments;
+    private final OverviewFragment[] overviewFragments;
 
     public ViewPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -36,7 +36,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        //TODO: // FIXME: 07.03.16 crash when trying to return page title
-        return overviewFragments[position].getMonth().getMonthName();
+        return overviewFragments[position].getMonthName();
     }
 }

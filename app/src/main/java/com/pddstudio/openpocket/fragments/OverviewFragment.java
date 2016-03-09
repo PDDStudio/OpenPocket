@@ -31,12 +31,12 @@ public class OverviewFragment extends Fragment {
     public static OverviewFragment newInstance(Month month) {
         OverviewFragment overviewFragment = new OverviewFragment();
         Bundle args = new Bundle();
-        args.putString("Month", month.name());
+        args.putString("monthName", month.getMonthName());
         overviewFragment.setArguments(args);
         return overviewFragment;
     }
 
-    private Month month;
+    private String monthName;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstance) {
@@ -46,11 +46,11 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-        month = Month.valueOf(getArguments().getString("Month"));
+        monthName = getArguments().getString("monthName");
     }
 
-    public Month getMonth() {
-        return month;
+    public String getMonthName() {
+        return monthName;
     }
 
     @Override
