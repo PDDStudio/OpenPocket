@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">OpenPocket</string>
     <string name="current_balance">Current Balance:</string>
+    <string name="no_records_found">No Records found for this Month</string>
 </resources>

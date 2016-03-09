@@ -7,6 +7,8 @@ package com.pddstudio.openpocket.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.LayoutInflaterCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
+import com.mikepenz.iconics.context.IconicsLayoutInflater;
 import com.pddstudio.openpocket.R;
 import com.pddstudio.pocketlibrary.enums.Month;
 
@@ -25,6 +28,8 @@ public class OverviewFragment extends Fragment {
     @InjectView(R.id.recyclerView) private RecyclerView recyclerView;
     private FastItemAdapter fastItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    //TODO: add lookup functionality as soon as it is implemented in backend
+    private boolean recordsFound = false;
 
     public OverviewFragment() {}
 
@@ -40,7 +45,9 @@ public class OverviewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle savedInstance) {
-        return layoutInflater.inflate(R.layout.fragment_overview, viewGroup, false);
+        return recordsFound ?
+                layoutInflater.inflate(R.layout.fragment_overview, viewGroup, false) :
+                layoutInflater.inflate(R.layout.fragment_overview_empty, viewGroup, false);
     }
 
     @Override
@@ -58,12 +65,13 @@ public class OverviewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Injector.inject(this, view);
         //setup the fragment
-        layoutManager = new LinearLayoutManager(getContext());
-        fastItemAdapter = new FastItemAdapter();
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(fastItemAdapter);
-
+        if(recordsFound) {
+            layoutManager = new LinearLayoutManager(getContext());
+            fastItemAdapter = new FastItemAdapter();
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(fastItemAdapter);
+        }
     }
 
 }
