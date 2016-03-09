@@ -27,6 +27,7 @@ public class CoordinatorBalanceView extends LinearLayout {
     private TextView mBalanceView;
     private Context mContext;
     private OnBalanceUpdateListener mUpdateListener;
+    private String moneyPostFix;
 
     public CoordinatorBalanceView(Context context) {
         super(context);
@@ -63,14 +64,16 @@ public class CoordinatorBalanceView extends LinearLayout {
 
             String titleText = typedArray.getString(R.styleable.CoordinatorBalanceView_titleText);
             String balanceText = typedArray.getString(R.styleable.CoordinatorBalanceView_balanceText);
+            String moneyPostFix = typedArray.getString(R.styleable.CoordinatorBalanceView_moneyPostFix);
             @ColorInt int textColor = typedArray.getColor(R.styleable.CoordinatorBalanceView_textColor, Color.WHITE);
 
             typedArray.recycle();
 
-            if(balanceText != null) mBalanceView.setText(balanceText);
+            this.moneyPostFix = (moneyPostFix != null) ? moneyPostFix : "$";
+            if(balanceText != null) mBalanceView.setText(balanceText + this.moneyPostFix);
             if(titleText != null) mTitleView.setText(titleText);
             setTextColor(textColor);
-        }
+        } else this.moneyPostFix = "$";
     }
 
     public void setTitleText(String titleText) {
@@ -82,8 +85,8 @@ public class CoordinatorBalanceView extends LinearLayout {
     }
 
     public void setBalanceText(String balanceText) {
-        this.mBalanceView.setText(balanceText);
-        if(mUpdateListener != null) mUpdateListener.onBalanceUpdate(balanceText);
+        this.mBalanceView.setText(balanceText + moneyPostFix);
+        if(mUpdateListener != null) mUpdateListener.onBalanceUpdate(balanceText + moneyPostFix);
     }
 
     public void setTextColor(@ColorInt int textColor) {
@@ -95,12 +98,20 @@ public class CoordinatorBalanceView extends LinearLayout {
         this.mUpdateListener = onBalanceUpdateListener;
     }
 
+    public void setMoneyPostFix(String moneyPostFix) {
+        this.moneyPostFix = moneyPostFix;
+    }
+
     public String getTitleText() {
         return mTitleView.getText().toString();
     }
 
     public String getBalanceText() {
         return mBalanceView.getText().toString();
+    }
+
+    public String getMoneyPostFix() {
+        return moneyPostFix;
     }
 
 

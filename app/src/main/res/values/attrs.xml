@@ -4,5 +4,6 @@
         <attr name="textColor" format="color" />
         <attr name="titleText" format="string" />
         <attr name="balanceText" format="string" />
+        <attr name="moneyPostFix" format="string" />
     </declare-styleable>
 </resources>
