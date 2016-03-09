@@ -29,9 +29,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:balanceText="1200"
                 app:titleText="@string/current_balance"
                 app:textColor="@android:color/white"
+                app:currentBalance="1200"
                 app:moneyPostFix="€"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />

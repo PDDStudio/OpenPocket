@@ -28,6 +28,9 @@ public class CoordinatorBalanceView extends LinearLayout {
     private Context mContext;
     private OnBalanceUpdateListener mUpdateListener;
     private String moneyPostFix;
+    private double mCurrentBalance = 0;
+    @ColorInt private int positiveBalanceColor;
+    @ColorInt private int negativeBalanceColor;
 
     public CoordinatorBalanceView(Context context) {
         super(context);
@@ -63,17 +66,24 @@ public class CoordinatorBalanceView extends LinearLayout {
             TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.CoordinatorBalanceView, 0, 0);
 
             String titleText = typedArray.getString(R.styleable.CoordinatorBalanceView_titleText);
-            String balanceText = typedArray.getString(R.styleable.CoordinatorBalanceView_balanceText);
             String moneyPostFix = typedArray.getString(R.styleable.CoordinatorBalanceView_moneyPostFix);
             @ColorInt int textColor = typedArray.getColor(R.styleable.CoordinatorBalanceView_textColor, Color.WHITE);
+            this.positiveBalanceColor = typedArray.getColor(R.styleable.CoordinatorBalanceView_balancePositiveColor, Color.GREEN);
+            this.negativeBalanceColor = typedArray.getColor(R.styleable.CoordinatorBalanceView_balanceNegativeColor, Color.RED);
+            this.mCurrentBalance = typedArray.getInteger(R.styleable.CoordinatorBalanceView_currentBalance, 0);
 
             typedArray.recycle();
 
             this.moneyPostFix = (moneyPostFix != null) ? moneyPostFix : "$";
-            if(balanceText != null) mBalanceView.setText(balanceText + this.moneyPostFix);
             if(titleText != null) mTitleView.setText(titleText);
             setTextColor(textColor);
+            setCurrentBalance(mCurrentBalance);
         } else this.moneyPostFix = "$";
+    }
+
+    private void updateBalanceText() {
+        String balance = getBalanceText().replace(moneyPostFix, "");
+        mBalanceView.setTextColor(Math.round(mCurrentBalance) < 0 ? negativeBalanceColor : positiveBalanceColor);
     }
 
     public void setTitleText(String titleText) {
@@ -84,14 +94,22 @@ public class CoordinatorBalanceView extends LinearLayout {
         this.mTitleView.setText(titleText);
     }
 
-    public void setBalanceText(String balanceText) {
-        this.mBalanceView.setText(balanceText + moneyPostFix);
-        if(mUpdateListener != null) mUpdateListener.onBalanceUpdate(balanceText + moneyPostFix);
+    public void setCurrentBalance(double currentBalance) {
+        this.mBalanceView.setText(currentBalance + moneyPostFix);
+        updateBalanceText();
+        if(mUpdateListener != null) mUpdateListener.onBalanceUpdate(currentBalance + moneyPostFix);
     }
 
     public void setTextColor(@ColorInt int textColor) {
         this.mTitleView.setTextColor(textColor);
-        this.mBalanceView.setTextColor(textColor);
+    }
+
+    public void setPositiveBalanceColor(@ColorInt int positiveBalanceColor) {
+        this.positiveBalanceColor = positiveBalanceColor;
+    }
+
+    public void setNegativeBalanceColor(@ColorInt int negativeBalanceColor) {
+        this.negativeBalanceColor = negativeBalanceColor;
     }
 
     public void setBalanceUpdateListener(OnBalanceUpdateListener onBalanceUpdateListener) {
@@ -114,6 +132,15 @@ public class CoordinatorBalanceView extends LinearLayout {
         return moneyPostFix;
     }
 
+    @ColorInt
+    public int getPositiveBalanceColor() {
+        return positiveBalanceColor;
+    }
+
+    @ColorInt
+    public int getNegativeBalanceColor() {
+        return negativeBalanceColor;
+    }
 
     public interface OnBalanceUpdateListener {
         void onBalanceUpdate(String balanceText);

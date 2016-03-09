@@ -2,8 +2,10 @@
 <resources>
     <declare-styleable name="CoordinatorBalanceView">
         <attr name="textColor" format="color" />
+        <attr name="balancePositiveColor" format="color" />
+        <attr name="balanceNegativeColor" format="color" />
         <attr name="titleText" format="string" />
-        <attr name="balanceText" format="string" />
+        <attr name="currentBalance" format="integer" />
         <attr name="moneyPostFix" format="string" />
     </declare-styleable>
 </resources>
