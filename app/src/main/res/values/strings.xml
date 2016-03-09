@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OpenPocket</string>
+    <string name="current_balance">Current Balance:</string>
 </resources>

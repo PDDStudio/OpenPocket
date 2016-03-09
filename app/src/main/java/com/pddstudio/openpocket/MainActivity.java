@@ -1,5 +1,6 @@
 package com.pddstudio.openpocket;
 
+import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.pddstudio.openpocket.adapters.ViewPagerAdapter;
+import com.pddstudio.openpocket.views.CoordinatorBalanceView;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Profile;
 
@@ -23,8 +25,7 @@ import io.inject.Injector;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    @InjectView(R.id.collapsingToolbarLayout) private CollapsingToolbarLayout collapsingToolbarLayout;
-    @InjectView(R.id.appBarLayout) private AppBarLayout appBarLayout;
+    @InjectView(R.id.balanceView) private CoordinatorBalanceView coordinatorBalanceView;
     @InjectView(R.id.tabLayout) private TabLayout tabLayout;
     @InjectView(R.id.viewPager) private ViewPager viewPager;
 
