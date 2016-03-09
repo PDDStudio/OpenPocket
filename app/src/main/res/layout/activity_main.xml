@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:fitsSystemWindows="true"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -25,7 +25,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_scrollFlags="scroll|enterAlways" />
 
@@ -33,7 +33,8 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:layout_gravity="bottom"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:tabMode="scrollable"
                 app:layout_collapseMode="pin"/>
 
