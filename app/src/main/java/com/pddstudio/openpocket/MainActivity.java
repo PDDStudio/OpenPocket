@@ -1,5 +1,6 @@
 package com.pddstudio.openpocket;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,8 @@ import io.inject.Injector;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    @InjectView(R.id.collapsingToolbarLayout) private CollapsingToolbarLayout collapsingToolbarLayout;
+    @InjectView(R.id.appBarLayout) private AppBarLayout appBarLayout;
     @InjectView(R.id.tabLayout) private TabLayout tabLayout;
     @InjectView(R.id.viewPager) private ViewPager viewPager;
 
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstance)
                 .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(accountHeader)
-                .withFullscreen(true)
+                .withFullscreen(false)
                 .withTranslucentStatusBar(true)
                 .withTranslucentNavigationBarProgrammatically(true)
                 .build();
