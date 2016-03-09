@@ -61,6 +61,16 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen()) {
+            drawer.closeDrawer();
+        } else {
+            this.finish();
+            System.exit(0);
+        }
+    }
+
     private void buildNavigationDrawer(Bundle savedInstance) {
 
         accountHeader = new AccountHeaderBuilder().withActivity(this).withHeaderBackground(R.color.colorPrimary).build();
