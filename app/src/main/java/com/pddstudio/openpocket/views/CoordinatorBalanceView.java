@@ -26,6 +26,7 @@ public class CoordinatorBalanceView extends LinearLayout {
     private TextView mTitleView;
     private TextView mBalanceView;
     private Context mContext;
+    private OnBalanceUpdateListener mUpdateListener;
 
     public CoordinatorBalanceView(Context context) {
         super(context);
@@ -82,11 +83,16 @@ public class CoordinatorBalanceView extends LinearLayout {
 
     public void setBalanceText(String balanceText) {
         this.mBalanceView.setText(balanceText);
+        if(mUpdateListener != null) mUpdateListener.onBalanceUpdate(balanceText);
     }
 
     public void setTextColor(@ColorInt int textColor) {
         this.mTitleView.setTextColor(textColor);
         this.mBalanceView.setTextColor(textColor);
+    }
+
+    public void setBalanceUpdateListener(OnBalanceUpdateListener onBalanceUpdateListener) {
+        this.mUpdateListener = onBalanceUpdateListener;
     }
 
     public String getTitleText() {
@@ -95,6 +101,11 @@ public class CoordinatorBalanceView extends LinearLayout {
 
     public String getBalanceText() {
         return mBalanceView.getText().toString();
+    }
+
+
+    public interface OnBalanceUpdateListener {
+        void onBalanceUpdate(String balanceText);
     }
 
 }
