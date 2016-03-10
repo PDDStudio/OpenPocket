@@ -16,6 +16,12 @@ public final class DateUtils {
         return calendar.get(Calendar.YEAR);
     }
 
+    public static int getCurrentMonth() {
+        //returns the current month, starting from 0 = January
+        Calendar calendar = GregorianCalendar.getInstance(Locale.getDefault());
+        return calendar.get(Calendar.MONTH);
+    }
+
     public static int getValueForMonth(String monthValue) {
         switch (monthValue) {
             case "Jan":
