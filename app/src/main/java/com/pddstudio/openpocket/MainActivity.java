@@ -1,5 +1,6 @@
 package com.pddstudio.openpocket;
 
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.view.ViewPager;
@@ -7,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.mikepenz.community_material_typeface_library.CommunityMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.context.IconicsLayoutInflater;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @InjectView(R.id.balanceView) private CoordinatorBalanceView coordinatorBalanceView;
     @InjectView(R.id.tabLayout) private TabLayout tabLayout;
     @InjectView(R.id.viewPager) private ViewPager viewPager;
+    @InjectView(R.id.floatingActionButton) private FloatingActionButton floatingActionButton;
 
     private Drawer drawer;
     private AccountHeader accountHeader;
@@ -69,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
         //switch to the current month
         viewPager.setCurrentItem(DateUtils.getCurrentMonth(), true);
+
+        //setup the fab
+        floatingActionButton.setImageDrawable(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_plus).color(Color.WHITE).sizeDp(18));
+
     }
 
     @Override
