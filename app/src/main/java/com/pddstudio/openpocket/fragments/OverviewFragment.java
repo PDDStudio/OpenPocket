@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.pddstudio.openpocket.R;
+import com.pddstudio.openpocket.adapters.items.TransactionItem;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.enums.Month;
 import com.pddstudio.pocketlibrary.models.Transaction;
@@ -81,11 +82,23 @@ public class OverviewFragment extends Fragment implements SwipeRefreshLayout.OnR
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(fastItemAdapter);
+            for(Transaction transaction : transactions) {
+                TransactionItem transactionItem = new TransactionItem(transaction);
+                fastItemAdapter.add(transactionItem);
+            }
         }
     }
 
     @Override
     public void onRefresh() {
-
+        if(fastItemAdapter != null) {
+            fastItemAdapter.clear();
+            transactions = OpenPocket.get().getTransactionManager().getFilteredTransactionList(DateUtils.getValueForMonth(monthName), DateUtils.getCurrentYear());
+            for(Transaction transaction : transactions) {
+                TransactionItem transactionItem = new TransactionItem(transaction);
+                fastItemAdapter.add(transactionItem);
+            }
+            //TODO: handle case when refreshing and no item exist
+        }
     }
 }
