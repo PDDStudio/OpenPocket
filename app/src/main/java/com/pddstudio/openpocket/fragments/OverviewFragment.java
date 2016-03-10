@@ -7,6 +7,7 @@ package com.pddstudio.openpocket.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,9 +27,10 @@ import java.util.List;
 import io.inject.InjectView;
 import io.inject.Injector;
 
-public class OverviewFragment extends Fragment {
+public class OverviewFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @InjectView(R.id.recyclerView) private RecyclerView recyclerView;
+    @InjectView(R.id.swipeRefreshLayout) private SwipeRefreshLayout swipeRefreshLayout;
     private FastItemAdapter fastItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Transaction> transactions;
@@ -70,6 +72,10 @@ public class OverviewFragment extends Fragment {
         Injector.inject(this, view);
         //setup the fragment
         if(transactions.size() > 0) {
+            //setup the refresh layout
+            swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorPrimaryLight);
+            swipeRefreshLayout.setOnRefreshListener(this);
+            //setup the recyclerview and it's adapter
             layoutManager = new LinearLayoutManager(getContext());
             fastItemAdapter = new FastItemAdapter();
             recyclerView.setHasFixedSize(true);
@@ -78,4 +84,8 @@ public class OverviewFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onRefresh() {
+
+    }
 }
