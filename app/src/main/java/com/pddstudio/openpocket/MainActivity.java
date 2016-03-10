@@ -17,6 +17,7 @@ import com.pddstudio.openpocket.adapters.ViewPagerAdapter;
 import com.pddstudio.openpocket.views.CoordinatorBalanceView;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Profile;
+import com.pddstudio.pocketutils.DateUtils;
 
 import io.inject.InjectView;
 import io.inject.Injector;
@@ -52,7 +53,20 @@ public class MainActivity extends AppCompatActivity {
         //setup the view pager
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position) {
+                toolbar.setTitle(getString(R.string.toolbar_title, viewPagerAdapter.getPageTitle(position).toString() + " " + DateUtils.getCurrentYear()));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
         tabLayout.setupWithViewPager(viewPager);
+        
 
     }
 
