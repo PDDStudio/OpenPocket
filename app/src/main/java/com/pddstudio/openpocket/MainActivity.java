@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
         });
         tabLayout.setupWithViewPager(viewPager);
 
-
+        //switch to the current month
+        viewPager.setCurrentItem(DateUtils.getCurrentMonth(), true);
     }
 
     @Override
