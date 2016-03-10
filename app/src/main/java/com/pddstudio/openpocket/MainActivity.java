@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
@@ -26,7 +27,7 @@ import com.pddstudio.pocketutils.DateUtils;
 import io.inject.InjectView;
 import io.inject.Injector;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar toolbar;
     @InjectView(R.id.balanceView) private CoordinatorBalanceView coordinatorBalanceView;
@@ -117,6 +118,15 @@ public class MainActivity extends AppCompatActivity {
                 .withTranslucentStatusBar(true)
                 .withTranslucentNavigationBarProgrammatically(true)
                 .build();
+    }
+
+    @Override
+    public void onClick(View v) {
+        //handle clicks depending on the clicked view
+        switch (v.getId()) {
+            default:
+                break;
+        }
     }
 
 }
