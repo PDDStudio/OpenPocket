@@ -22,6 +22,8 @@ public final class Preferences {
     private Preferences(Context context) {
         this.context = context;
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //init the icon parser for later usage
+        IconParser.initialize(context);
     }
 
     public static void init(Context context) {
