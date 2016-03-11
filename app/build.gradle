@@ -36,6 +36,10 @@ dependencies {
     compile('com.mikepenz:fastadapter:1.2.3@aar') {
         transitive = true
     }
+    //item animators
+    compile('com.mikepenz:itemanimators:0.2.2@aar') {
+        transitive = true
+    }
     compile 'com.mikepenz:fastadapter-extensions:1.2.3@aar'
     //android iconics
     compile 'com.mikepenz:iconics-core:2.5.8@aar'
