@@ -23,7 +23,7 @@ public final class IconParser {
     }
 
     public static void initialize(Context context) {
-        iconParser = new IconParser(context);
+        if(iconParser == null) iconParser = new IconParser(context);
     }
 
     public static IIcon getIcon(final String iconName) {
