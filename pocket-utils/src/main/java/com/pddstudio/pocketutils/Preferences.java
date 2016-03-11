@@ -13,6 +13,9 @@ public final class Preferences {
 
     private static Preferences preferences;
 
+    private static final String TRANSPARENT_NAVIGATION_BAR = "tNavBar";
+    private static final String CURRENCY = "currency";
+
     private final Context context;
     private final SharedPreferences sharedPreferences;
 
@@ -27,6 +30,22 @@ public final class Preferences {
 
     public static Preferences get() {
         return preferences;
+    }
+
+    public boolean transparentNavigationBar() {
+        return sharedPreferences.getBoolean(TRANSPARENT_NAVIGATION_BAR, true);
+    }
+
+    public String getCurrencySymbol() {
+        return sharedPreferences.getString(CURRENCY, "$");
+    }
+
+    public void setTransparentNavigationBar(boolean transparentNavigationBar) {
+        sharedPreferences.edit().putBoolean(TRANSPARENT_NAVIGATION_BAR, transparentNavigationBar).apply();
+    }
+
+    public void setCurrencySymbol(String currencySymbol) {
+        sharedPreferences.edit().putString(CURRENCY, currencySymbol).apply();
     }
 
 }
