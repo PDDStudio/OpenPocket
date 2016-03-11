@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pddstudio.openpocket.R;
+import com.pddstudio.pocketutils.Preferences;
 
 public class CoordinatorBalanceView extends LinearLayout {
 
@@ -78,7 +79,7 @@ public class CoordinatorBalanceView extends LinearLayout {
             if(titleText != null) mTitleView.setText(titleText);
             setTextColor(textColor);
             setCurrentBalance(mCurrentBalance);
-        } else this.moneyPostFix = "$";
+        } else this.moneyPostFix = Preferences.get().getCurrencySymbol();
     }
 
     private void updateBalanceText() {

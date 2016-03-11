@@ -23,6 +23,7 @@ import com.pddstudio.openpocket.views.CoordinatorBalanceView;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Profile;
 import com.pddstudio.pocketutils.DateUtils;
+import com.pddstudio.pocketutils.Preferences;
 
 import io.inject.InjectView;
 import io.inject.Injector;
@@ -43,7 +44,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
+
+        //init preferences
+        Preferences.init(this);
+
+        //set the layout
         setContentView(R.layout.activity_main);
+
         //bind the views
         Injector.inject(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
