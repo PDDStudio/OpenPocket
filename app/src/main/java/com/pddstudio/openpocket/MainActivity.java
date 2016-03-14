@@ -1,5 +1,6 @@
 package com.pddstudio.openpocket;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.LayoutInflaterCompat;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //setup the fab
         floatingActionButton.setImageDrawable(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_plus).color(Color.WHITE).sizeDp(18));
+        floatingActionButton.setOnClickListener(this);
 
     }
 
@@ -131,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         //handle clicks depending on the clicked view
         switch (v.getId()) {
+            case R.id.floatingActionButton:
+                Intent intent = new Intent(this, TransactionActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
