@@ -1,13 +1,15 @@
 package com.pddstudio.openpocket;
 
 import android.graphics.Color;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -28,6 +30,9 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     @InjectView(R.id.floatingActionButton)
     private FloatingActionButton floatingActionButton;
 
+    @InjectView(R.id.transactionToolbar)
+    private Toolbar toolbar;
+
     private FastItemAdapter<CategoryItem> fastItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -38,6 +43,11 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
         Injector.inject(this);
+
+        //set the toolbar
+        toolbar.setTitle(R.string.toolbar_transaction_title);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //configure the recyclerview and load the items
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -61,5 +71,5 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
 
     }
-    
+
 }

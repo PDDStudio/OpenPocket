@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">OpenPocket</string>
     <string name="toolbar_title">OpenPocket - %s</string>
+    <string name="toolbar_transaction_title">Add spending</string>
     <string name="current_balance">Current Balance:</string>
     <string name="no_records_found">No Records found for this Month</string>
 </resources>
