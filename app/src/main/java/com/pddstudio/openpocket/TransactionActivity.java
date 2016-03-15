@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -14,6 +13,8 @@ import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.pddstudio.openpocket.adapters.items.CategoryItem;
+import com.pddstudio.openpocket.fragments.AmountInputFragment;
+import com.pddstudio.openpocket.model.Action;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Category;
 
@@ -22,7 +23,7 @@ import java.util.List;
 import io.inject.InjectView;
 import io.inject.Injector;
 
-public class TransactionActivity extends AppCompatActivity implements View.OnClickListener {
+public class TransactionActivity extends AppCompatActivity implements View.OnClickListener, AmountInputFragment.InputCallback {
 
     @InjectView(R.id.categoryRecyclerView)
     private RecyclerView recyclerView;
@@ -65,6 +66,13 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         floatingActionButton.setImageDrawable(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_check).color(Color.WHITE));
         floatingActionButton.setOnClickListener(this);
 
+        //set the number input field
+        AmountInputFragment amountInputFragment = new AmountInputFragment().withInputCallback(this);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.categoryFragmentPlaceHolder, amountInputFragment)
+                .commit();
+
     }
 
     @Override
@@ -72,4 +80,8 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    @Override
+    public void onInput(Action action) {
+
+    }
 }
