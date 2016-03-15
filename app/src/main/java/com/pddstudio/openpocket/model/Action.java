@@ -16,7 +16,7 @@ public enum Action {
     INPUT_7("7"),
     INPUT_8("8"),
     INPUT_9("9"),
-    INPUT_BACK("x"),
+    INPUT_DEL("x"),
     INPUT_DOT(".");
 
     private final String actionString;

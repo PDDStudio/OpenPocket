@@ -1,1 +1,1 @@
-include ':app', ':pocket-lib', ':pocket-utils', ':numpad-lib'
+include ':app', ':pocket-lib', ':pocket-utils'

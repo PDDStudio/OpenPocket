@@ -6,4 +6,6 @@
     <dimen name="card_padding">12dp</dimen>
     <dimen name="textSizeLarge">20sp</dimen>
     <dimen name="textSizeSmall">14sp</dimen>
+    <!-- AmountInputView dimens -->
+    <dimen name="button_size">100dp</dimen>
 </resources>

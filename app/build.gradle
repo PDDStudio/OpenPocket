@@ -51,5 +51,4 @@ dependencies {
     //repository projects
     compile project(':pocket-lib')
     compile project(':pocket-utils')
-    compile project(':numpad-lib')
 }
