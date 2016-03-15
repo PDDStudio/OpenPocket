@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OpenPocket.iml" filepath="$PROJECT_DIR$/OpenPocket.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/numpad-lib/numpad-lib.iml" filepath="$PROJECT_DIR$/numpad-lib/numpad-lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/pocket-lib/pocket-lib.iml" filepath="$PROJECT_DIR$/pocket-lib/pocket-lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/pocket-utils/pocket-utils.iml" filepath="$PROJECT_DIR$/pocket-utils/pocket-utils.iml" />
     </modules>
