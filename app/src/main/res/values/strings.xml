@@ -4,4 +4,7 @@
     <string name="toolbar_transaction_title">Add spending</string>
     <string name="current_balance">Current Balance:</string>
     <string name="no_records_found">No Records found for this Month</string>
+    <!-- TransactionActivity Strings -->
+    <string name="amount">Amount</string>
+    <string name="category">Category</string>
 </resources>

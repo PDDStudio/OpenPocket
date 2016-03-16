@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
@@ -17,6 +19,7 @@ import com.pddstudio.openpocket.fragments.AmountInputFragment;
 import com.pddstudio.openpocket.model.Action;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Category;
+import com.pddstudio.pocketutils.Preferences;
 
 import java.util.List;
 
@@ -33,6 +36,12 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
 
     @InjectView(R.id.transactionToolbar)
     private Toolbar toolbar;
+
+    @InjectView(R.id.amountTextView)
+    private TextView amountText;
+
+    @InjectView(R.id.categoryTextView)
+    private TextView categoryText;
 
     private FastItemAdapter<CategoryItem> fastItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -73,6 +82,9 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                 .replace(R.id.categoryFragmentPlaceHolder, amountInputFragment)
                 .commit();
 
+        //set the amount to 0 by default
+        amountText.setText(Preferences.get().getCurrencySymbol() + "0");
+
     }
 
     @Override
@@ -82,6 +94,20 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onInput(Action action) {
-
+        Log.d("TransactionActivity", "Action triggered: " + action.name() + " [" + action.getActionString() + "]");
+        //parse the action and react on it
+        switch (action) {
+            case INPUT_DEL:
+                if(amountText.getText().length() == 1) {
+                    amountText.setText(amountText.getText() + "0");
+                } else {
+                    amountText.setText(amountText.getText().subSequence(0, amountText.getText().length() -1));
+                }
+                break;
+            default:
+                if(amountText.getText().toString().contentEquals(Preferences.get().getCurrencySymbol() + "0")) amountText.setText(Preferences.get().getCurrencySymbol());
+                amountText.setText(amountText.getText() + action.getActionString());
+                break;
+        }
     }
 }
