@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 
 import com.pddstudio.openpocket.R;
@@ -43,24 +44,31 @@ public class AmountInputView extends RelativeLayout implements View.OnClickListe
 
     public AmountInputView(Context context) {
         super(context);
+        buildLayout(context);
     }
 
     public AmountInputView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        buildLayout(context);
     }
 
     public AmountInputView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        buildLayout(context);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public AmountInputView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        buildLayout(context);
     }
 
     private void buildLayout(Context context) {
+        mContext = context;
+        //inflate the layout
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mLayoutView = layoutInflater.inflate(R.layout.view_amount_input, this, false);
+        mGridLayout = (GridLayout) mLayoutView.findViewById(R.id.view_grid);
         //assign the buttons inside the layout
         mActionButton0 = (Button) mLayoutView.findViewById(R.id.key_btn_0);
         mActionButton1 = (Button) mLayoutView.findViewById(R.id.key_btn_1);
