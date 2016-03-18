@@ -6,7 +6,6 @@ package com.pddstudio.pocketlibrary;
  */
 
 import com.pddstudio.pocketlibrary.models.Category;
-import com.pddstudio.pocketlibrary.models.Profile;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,8 +19,18 @@ public class CategoryManager {
 
     protected CategoryManager() {}
 
+    private Category getDefaultCategory() {
+        Category category = new Category();
+        category.setCategoryName("Default");
+        category.setCategoryIcon("cmd_currency_usd");
+        category.setCategoryDescription("Default Category created by OpenPocket");
+        return category;
+    }
+
     public List<Category> getCategoryList() {
-        return Paper.book().read(CATEGORY_ITEMS, new LinkedList<Category>());
+        List<Category> categories =  Paper.book().read(CATEGORY_ITEMS, new LinkedList<Category>());
+        if(categories.isEmpty()) categories.add(getDefaultCategory());
+        return categories;
     }
 
     public void addCategory(Category category) {
