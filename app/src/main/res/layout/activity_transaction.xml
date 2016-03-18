@@ -76,7 +76,11 @@
             android:id="@+id/categoryRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clipToPadding="false"
+            android:layout_marginBottom="8dp"/>
 
         <RelativeLayout
             android:id="@+id/categoryFragmentPlaceHolder"
