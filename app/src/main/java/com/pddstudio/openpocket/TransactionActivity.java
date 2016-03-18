@@ -1,8 +1,8 @@
 package com.pddstudio.openpocket;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
+import com.mikepenz.fastadapter.FastAdapter;
+import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
 import com.pddstudio.openpocket.adapters.items.CategoryItem;
 import com.pddstudio.openpocket.fragments.AmountInputFragment;
 import com.pddstudio.openpocket.model.Action;
@@ -26,7 +29,8 @@ import java.util.List;
 import io.inject.InjectView;
 import io.inject.Injector;
 
-public class TransactionActivity extends AppCompatActivity implements View.OnClickListener, AmountInputFragment.InputCallback {
+public class TransactionActivity extends AppCompatActivity implements View.OnClickListener,
+        AmountInputFragment.InputCallback, FastAdapter.OnClickListener<CategoryItem> {
 
     @InjectView(R.id.categoryRecyclerView)
     private RecyclerView recyclerView;
@@ -62,9 +66,11 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         //configure the recyclerview and load the items
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         fastItemAdapter = new FastItemAdapter<>();
+        fastItemAdapter.withOnClickListener(this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(fastItemAdapter);
+        recyclerView.setItemAnimator(new SlideInOutLeftAnimator(recyclerView));
 
         categories = OpenPocket.get().getCategoryManager().getCategoryList();
         for(Category category : categories) {
@@ -88,11 +94,6 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
     public void onInput(Action action) {
         Log.d("TransactionActivity", "Action triggered: " + action.name() + " [" + action.getActionString() + "]");
         //parse the action and react on it
@@ -109,5 +110,16 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                 amountText.setText(amountText.getText() + action.getActionString());
                 break;
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public boolean onClick(View v, IAdapter<CategoryItem> adapter, CategoryItem item, int position) {
+        categoryText.setText(item.getCategory().getCategoryName());
+        return true;
     }
 }

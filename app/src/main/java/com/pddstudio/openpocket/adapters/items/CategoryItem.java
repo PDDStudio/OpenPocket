@@ -23,6 +23,10 @@ public class CategoryItem extends AbstractItem<CategoryItem, CategoryItem.ViewHo
         this.category = category;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     @Override
     public int getType() {
         return R.id.category_item;
