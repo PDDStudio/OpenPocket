@@ -20,6 +20,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.pddstudio.openpocket.adapters.ViewPagerAdapter;
+import com.pddstudio.openpocket.utils.DrawerUtils;
 import com.pddstudio.openpocket.views.CoordinatorBalanceView;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Profile;
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .withFullscreen(false)
                 .withTranslucentStatusBar(true)
                 .withTranslucentNavigationBarProgrammatically(true)
+                .withDrawerItems(DrawerUtils.getDrawerItems())
                 .build();
     }
 
