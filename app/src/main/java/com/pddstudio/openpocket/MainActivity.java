@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-                toolbar.setTitle(getString(R.string.toolbar_title, viewPagerAdapter.getPageTitle(position).toString() + " " + DateUtils.getCurrentYear()));
+                toolbar.setSubtitle(viewPagerAdapter.getPageTitle(position).toString() + " " + DateUtils.getCurrentYear());
             }
 
             @Override
