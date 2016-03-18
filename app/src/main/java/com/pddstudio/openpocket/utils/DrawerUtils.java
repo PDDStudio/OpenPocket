@@ -20,11 +20,13 @@ import java.util.List;
  */
 public final class DrawerUtils {
 
+    public static final int ITEM_HOME = 1;
+
     public static List<IDrawerItem> getDrawerItems() {
         List<IDrawerItem> drawerItems = new LinkedList<>();
         SectionDrawerItem generalSection = new SectionDrawerItem().withDivider(false).withName(R.string.drawer_category_gen);
         drawerItems.add(generalSection);
-        PrimaryDrawerItem homeItem = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(CommunityMaterial.Icon.cmd_home);
+        PrimaryDrawerItem homeItem = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(CommunityMaterial.Icon.cmd_home).withIdentifier(ITEM_HOME);
         drawerItems.add(homeItem);
         SectionDrawerItem categorySection = new SectionDrawerItem().withName(R.string.drawer_category_cat);
         drawerItems.add(categorySection);

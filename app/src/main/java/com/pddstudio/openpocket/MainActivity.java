@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .withTranslucentStatusBar(true)
                 .withTranslucentNavigationBarProgrammatically(true)
                 .withDrawerItems(DrawerUtils.getDrawerItems())
+                .withSelectedItem(DrawerUtils.ITEM_HOME)
                 .build();
     }
 
