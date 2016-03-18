@@ -52,4 +52,15 @@ public final class DateUtils {
         return -1;
     }
 
+    public static String getCurrentDate() {
+        Calendar calendar = GregorianCalendar.getInstance(Locale.getDefault());
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(calendar.get(Calendar.YEAR))
+                .append(Preferences.get().getDateSeperator())
+                .append(calendar.get(Calendar.MONTH))
+                .append(Preferences.get().getDateSeperator())
+                .append(calendar.get(Calendar.DATE));
+        return stringBuilder.toString();
+    }
+
 }

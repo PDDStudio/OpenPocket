@@ -2,14 +2,18 @@ package com.pddstudio.openpocket;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fastadapter.FastAdapter;
@@ -20,8 +24,10 @@ import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
 import com.pddstudio.openpocket.adapters.items.CategoryItem;
 import com.pddstudio.openpocket.fragments.AmountInputFragment;
 import com.pddstudio.openpocket.model.Action;
+import com.pddstudio.openpocket.utils.DatePicker;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Category;
+import com.pddstudio.pocketutils.DateUtils;
 import com.pddstudio.pocketutils.Preferences;
 
 import java.util.List;
@@ -30,7 +36,8 @@ import io.inject.InjectView;
 import io.inject.Injector;
 
 public class TransactionActivity extends AppCompatActivity implements View.OnClickListener,
-        AmountInputFragment.InputCallback, FastAdapter.OnClickListener<CategoryItem> {
+        AmountInputFragment.InputCallback, FastAdapter.OnClickListener<CategoryItem>,
+        DatePicker.Callback {
 
     @InjectView(R.id.categoryRecyclerView)
     private RecyclerView recyclerView;
@@ -47,10 +54,14 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     @InjectView(R.id.categoryTextView)
     private TextView categoryText;
 
+    @InjectView(R.id.dateButton)
+    private Button dateButton;
+
     private FastItemAdapter<CategoryItem> fastItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private List<Category> categories;
+    private DatePicker datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +102,9 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         //set the amount to 0 by default
         amountText.setText(Preferences.get().getCurrencySymbol() + "0");
 
+        //set the current date to the date picker
+        dateButton.setText(DateUtils.getCurrentDate());
+        dateButton.setOnClickListener(this);
     }
 
     @Override
@@ -114,12 +128,49 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.dateButton) {
+            // DialogFragment to host SublimePicker
+            datePicker = new DatePicker();
+            datePicker.setCallback(this);
 
+            // Options
+            Pair<Boolean, SublimeOptions> optionsPair = getOptions();
+
+
+            // Valid options
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
+            datePicker.setArguments(bundle);
+
+            datePicker.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+            datePicker.show(getSupportFragmentManager(), "SUBLIME_PICKER");
+
+        }
     }
 
     @Override
     public boolean onClick(View v, IAdapter<CategoryItem> adapter, CategoryItem item, int position) {
         categoryText.setText(item.getCategory().getCategoryName());
         return true;
+    }
+
+    @Override
+    public void onCancelled() {}
+
+    @Override
+    public void onDateSelected(String date) {
+        dateButton.setText(date);
+    }
+
+    // Validates & returns SublimePicker options
+    private Pair<Boolean, SublimeOptions> getOptions() {
+        SublimeOptions options = new SublimeOptions();
+        int displayOptions = 0;
+        displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
+        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
+        options.setDisplayOptions(displayOptions);
+        // Enable/disable the date range selection feature
+        options.setCanPickDateRange(false);
+        return new Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
     }
 }

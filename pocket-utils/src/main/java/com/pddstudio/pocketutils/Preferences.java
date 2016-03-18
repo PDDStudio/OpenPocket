@@ -15,6 +15,7 @@ public final class Preferences {
 
     private static final String TRANSPARENT_NAVIGATION_BAR = "tNavBar";
     private static final String CURRENCY = "currency";
+    private static final String DATE_SEPERATOR = "dateSeperator";
 
     private final Context context;
     private final SharedPreferences sharedPreferences;
@@ -48,6 +49,14 @@ public final class Preferences {
 
     public void setCurrencySymbol(String currencySymbol) {
         sharedPreferences.edit().putString(CURRENCY, currencySymbol).apply();
+    }
+
+    public void setDateSeperator(String dateSeperator) {
+        sharedPreferences.edit().putString(DATE_SEPERATOR, dateSeperator).apply();
+    }
+
+    public String getDateSeperator() {
+        return sharedPreferences.getString(DATE_SEPERATOR, "/");
     }
 
 }

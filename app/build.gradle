@@ -49,6 +49,8 @@ dependencies {
     compile 'inject:inject:1.0.4'
     //fab
     compile 'com.github.clans:fab:1.6.2'
+    //sublime pickers
+    compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.0.0'
     //repository projects
     compile project(':pocket-lib')
     compile project(':pocket-utils')
