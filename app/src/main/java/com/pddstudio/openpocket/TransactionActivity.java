@@ -145,6 +145,9 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
             datePicker.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
             datePicker.show(getSupportFragmentManager(), "SUBLIME_PICKER");
 
+        } else if (v.getId() == R.id.floatingActionButton) {
+            Log.d("TransactionActivity", "Save Date: " + dateButton.getText() + " | Category: " + categoryText.getText() + " | Amount: " + amountText.getText());
+            //TODO: Add Transaction object to backend
         }
     }
 

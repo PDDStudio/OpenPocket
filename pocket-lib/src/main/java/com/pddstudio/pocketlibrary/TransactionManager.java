@@ -30,4 +30,10 @@ public class TransactionManager {
         return transactions;
     }
 
+    public void addTransaction(Transaction transaction) {
+        List<Transaction> currentTransactions = getCurrentTransactionList();
+        currentTransactions.add(transaction);
+        Paper.book().write(TRANSACTION_ITEMS, currentTransactions);
+    }
+
 }
