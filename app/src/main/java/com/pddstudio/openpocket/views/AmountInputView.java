@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
 
 import com.pddstudio.openpocket.R;
@@ -26,8 +24,6 @@ public class AmountInputView extends RelativeLayout implements View.OnClickListe
     private Context mContext;
     //the optional listener
     private AmountInputFragment.InputCallback inputCallback;
-    //the root layout
-    private GridLayout mGridLayout;
     //the other UI stuff
     private Button mActionButton1;
     private Button mActionButton2;
@@ -68,7 +64,6 @@ public class AmountInputView extends RelativeLayout implements View.OnClickListe
         //inflate the layout
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mLayoutView = layoutInflater.inflate(R.layout.view_amount_input, this, false);
-        mGridLayout = (GridLayout) mLayoutView.findViewById(R.id.view_grid);
         //assign the buttons inside the layout
         mActionButton0 = (Button) mLayoutView.findViewById(R.id.key_btn_0);
         mActionButton1 = (Button) mLayoutView.findViewById(R.id.key_btn_1);

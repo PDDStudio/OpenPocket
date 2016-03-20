@@ -1,86 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout
+<TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/view_grid"
+    android:id="@+id/view_table_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="3"
-    android:rowCount="4"
-    android:layout_rowSpan="4"
-    android:layout_columnSpan="3"
-    android:layout_gravity="center">
+    android:stretchColumns="*"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/key_btn_1"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_1"/>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/button_row_height">
 
-    <Button
-        android:id="@+id/key_btn_2"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_2" />
+        <Button
+            android:id="@+id/key_btn_1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_1"/>
 
-    <Button
-        android:id="@+id/key_btn_3"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_3" />
+        <Button
+            android:id="@+id/key_btn_2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_2" />
 
-    <Button
-        android:id="@+id/key_btn_4"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_4" />
+        <Button
+            android:id="@+id/key_btn_3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_3" />
 
-    <Button
-        android:id="@+id/key_btn_5"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_5" />
+    </TableRow>
 
-    <Button
-        android:id="@+id/key_btn_6"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_6" />
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/button_row_height">
 
-    <Button
-        android:id="@+id/key_btn_7"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_7" />
+        <Button
+            android:id="@+id/key_btn_4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_4" />
 
-    <Button
-        android:id="@+id/key_btn_8"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_8" />
+        <Button
+            android:id="@+id/key_btn_5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_5" />
 
-    <Button
-        android:id="@+id/key_btn_9"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_9" />
+        <Button
+            android:id="@+id/key_btn_6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_6" />
 
-    <Button
-        android:id="@+id/key_btn_dot"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_dot" />
+    </TableRow>
 
-    <Button
-        android:id="@+id/key_btn_0"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_0" />
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/button_row_height">
 
-    <Button
-        android:id="@+id/key_btn_del"
-        android:layout_width="@dimen/button_size"
-        android:layout_height="@dimen/button_size"
-        android:text="@string/key_del" />
+        <Button
+            android:id="@+id/key_btn_7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_7" />
 
-</GridLayout>
+        <Button
+            android:id="@+id/key_btn_8"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_8" />
+
+        <Button
+            android:id="@+id/key_btn_9"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_9" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/button_row_height">
+
+        <Button
+            android:id="@+id/key_btn_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_dot" />
+
+        <Button
+            android:id="@+id/key_btn_0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_0" />
+
+        <Button
+            android:id="@+id/key_btn_del"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/key_del" />
+
+    </TableRow>
+
+</TableLayout>

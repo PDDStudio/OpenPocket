@@ -7,5 +7,5 @@
     <dimen name="textSizeLarge">20sp</dimen>
     <dimen name="textSizeSmall">14sp</dimen>
     <!-- AmountInputView dimens -->
-    <dimen name="button_size">100dp</dimen>
+    <dimen name="button_row_height">70dp</dimen>
 </resources>
