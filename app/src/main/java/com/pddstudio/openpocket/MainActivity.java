@@ -125,8 +125,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(accountHeader)
                 .withFullscreen(false)
-                .withTranslucentStatusBar(true)
-                .withTranslucentNavigationBarProgrammatically(true)
                 .withDrawerItems(DrawerUtils.getDrawerItems())
                 .withSelectedItem(DrawerUtils.ITEM_HOME)
                 .build();
