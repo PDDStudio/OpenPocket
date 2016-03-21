@@ -18,6 +18,10 @@
         <activity
             android:name=".TransactionActivity"
             android:theme="@style/AppTheme.TransactionActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6a2f28ec90abe22b3686e0c3f2e8332c4eb87c03" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

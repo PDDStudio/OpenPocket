@@ -5,7 +5,9 @@ package com.pddstudio.pocketlibrary.models;
  * have a look at the README.md
  */
 
-public class Profile {
+import java.io.Serializable;
+
+public class Profile implements Serializable {
 
     private String profileName;
     private String profileDescription;

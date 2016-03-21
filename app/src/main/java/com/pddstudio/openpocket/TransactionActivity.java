@@ -1,5 +1,6 @@
 package com.pddstudio.openpocket;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
@@ -44,6 +45,8 @@ import io.inject.Injector;
 public class TransactionActivity extends AppCompatActivity implements View.OnClickListener,
         AmountInputFragment.InputCallback, FastAdapter.OnClickListener<CategoryItem>,
         DatePicker.OnDateSelectedListener {
+
+    public static final String TRANSACTION_ITEM = "mTransactionItem";
 
     @InjectView(R.id.coordinatorLayout)
     private CoordinatorLayout coordinatorLayout;
@@ -210,9 +213,10 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                         transaction.setCategory(category);
                         transaction.setTransactionDate(date);
                         transaction.setProfile(OpenPocket.get().getActiveProfile());
-                        //OpenPocket.get().getTransactionManager().addTransaction(transaction);
-                        //TODO: Add intent with transaction so amount can be added/removed from BalanceView
-                        setResult(RESULT_OK);
+                        OpenPocket.get().getTransactionManager().addTransaction(transaction);
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra(TRANSACTION_ITEM, transaction);
+                        setResult(RESULT_OK, resultIntent);
                         finish();
                     } else {
                         showSnackBar(R.string.snackbar_amount_zero);
@@ -261,7 +265,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                 + date.getMonth()
                 + Preferences.get().getDateSeperator()
                 + date.getDay();
-        this.dateButton.setText("{cmd-chevron-right} " +selDate);
+        this.dateButton.setText("{cmd-chevron-right} " + selDate);
     }
 
 }

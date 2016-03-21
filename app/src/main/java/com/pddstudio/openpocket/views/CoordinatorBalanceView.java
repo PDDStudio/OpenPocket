@@ -132,6 +132,10 @@ public class CoordinatorBalanceView extends LinearLayout {
         return moneyPostFix;
     }
 
+    public float getBalanceAmount() {
+        return Float.parseFloat(mBalanceView.getText().toString().replace(getMoneyPostFix(), ""));
+    }
+
     @ColorInt
     public int getPositiveBalanceColor() {
         return positiveBalanceColor;

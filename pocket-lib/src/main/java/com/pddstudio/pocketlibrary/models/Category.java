@@ -5,7 +5,9 @@ package com.pddstudio.pocketlibrary.models;
  * have a look at the README.md
  */
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
 
     private String categoryName;
     private String categoryDescription;

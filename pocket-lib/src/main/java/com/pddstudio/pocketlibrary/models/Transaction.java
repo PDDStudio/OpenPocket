@@ -5,7 +5,9 @@ package com.pddstudio.pocketlibrary.models;
  * have a look at the README.md
  */
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
 
     private Category category;
     private Profile profile;

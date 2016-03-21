@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
 import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -28,9 +29,11 @@ import com.pddstudio.openpocket.views.CoordinatorBalanceView;
 import com.pddstudio.openpocket.views.CustomAppBarLayout;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Profile;
+import com.pddstudio.pocketlibrary.models.Transaction;
 import com.pddstudio.pocketutils.DateUtils;
 import com.pddstudio.pocketutils.Preferences;
 
+import io.fabric.sdk.android.Fabric;
 import io.inject.InjectView;
 import io.inject.Injector;
 
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         LayoutInflaterCompat.setFactory(getLayoutInflater(), new IconicsLayoutInflater(getDelegate()));
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
 
         //init preferences
         Preferences.init(this);
@@ -165,6 +169,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == ADD_TRANSACTION_CODE && resultCode == RESULT_OK) {
             Log.d("MainActivity", "Received RESULT_OK");
+            Transaction transaction = (Transaction) data.getSerializableExtra(TransactionActivity.TRANSACTION_ITEM);
+            if(transaction.getMoneyAmount() < 0) {
+                float balance = coordinatorBalanceView.getBalanceAmount() - transaction.getMoneyAmount();
+                coordinatorBalanceView.setCurrentBalance(balance);
+            } else {
+                float balance = coordinatorBalanceView.getBalanceAmount() + transaction.getMoneyAmount();
+                coordinatorBalanceView.setCurrentBalance(balance);
+            }
             viewPagerAdapter.reloadItemData();
         }
     }

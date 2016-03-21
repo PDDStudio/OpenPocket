@@ -5,7 +5,9 @@ package com.pddstudio.pocketlibrary.models;
  * have a look at the README.md
  */
 
-public class Date {
+import java.io.Serializable;
+
+public class Date implements Serializable {
 
     private int year;
     private int month;
