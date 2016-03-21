@@ -7,6 +7,7 @@ package com.pddstudio.openpocket.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -71,6 +72,8 @@ public class OverviewFragment extends Fragment implements SwipeRefreshLayout.OnR
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Injector.inject(this, view);
+        //disable scrolling
+        ViewCompat.setNestedScrollingEnabled(view, false);
         //setup the fragment
         if(transactions.size() > 0) {
             //setup the refresh layout

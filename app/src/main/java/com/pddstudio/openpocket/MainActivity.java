@@ -2,11 +2,13 @@ package com.pddstudio.openpocket;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.LayoutInflaterCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -22,6 +24,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.pddstudio.openpocket.adapters.ViewPagerAdapter;
 import com.pddstudio.openpocket.utils.DrawerUtils;
 import com.pddstudio.openpocket.views.CoordinatorBalanceView;
+import com.pddstudio.openpocket.views.CustomAppBarLayout;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Profile;
 import com.pddstudio.pocketutils.DateUtils;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @InjectView(R.id.tabLayout) private TabLayout tabLayout;
     @InjectView(R.id.viewPager) private ViewPager viewPager;
     @InjectView(R.id.floatingActionButton) private FloatingActionButton floatingActionButton;
+    @InjectView(R.id.appBarLayout) private CustomAppBarLayout appBarLayout;
+    @InjectView(R.id.collapsingToolbarLayout) private CollapsingToolbarLayout collapsingToolbarLayout;
 
     private Drawer drawer;
     private AccountHeader accountHeader;
@@ -64,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //build the navigation drawer
         buildNavigationDrawer(savedInstanceState);
+
+        //disable scrolling
+        ViewCompat.setNestedScrollingEnabled(appBarLayout, false);
+        ViewCompat.setNestedScrollingEnabled(collapsingToolbarLayout, false);
+        ViewCompat.setNestedScrollingEnabled(toolbar, false);
+        appBarLayout.setScrollingEnabled(false);
 
         //setup the view pager
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
