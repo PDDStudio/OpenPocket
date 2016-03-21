@@ -13,6 +13,7 @@ import com.appeaser.sublimepickerlibrary.helpers.SublimeListenerAdapter;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.pddstudio.openpocket.R;
+import com.pddstudio.pocketlibrary.models.Date;
 import com.pddstudio.pocketutils.Preferences;
 
 import java.text.DateFormat;
@@ -26,6 +27,11 @@ import java.util.TimeZone;
  * have a look at the README.md
  */
 public class DatePicker extends DialogFragment {
+
+    public interface OnDateSelectedListener {
+        void onDateSelected(Date date);
+    }
+
     // Date & Time formatter used for formatting
     // text on the switcher button
     private DateFormat mDateFormatter, mTimeFormatter;
@@ -38,6 +44,7 @@ public class DatePicker extends DialogFragment {
 
     // Callback to activity
     private Callback mCallback;
+    private OnDateSelectedListener mDateSelectedListener;
 
     SublimeListenerAdapter mListener = new SublimeListenerAdapter() {
 
@@ -49,7 +56,11 @@ public class DatePicker extends DialogFragment {
                     + mSelectedDate.getStartDate().get(Calendar.MONTH)
                     + Preferences.get().getDateSeperator()
                     + mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH);
-            mCallback.onDateSelected(date);
+            if(mCallback != null) mCallback.onDateSelected(date);
+            if(mDateSelectedListener != null) {
+                Date mDate = new Date(mSelectedDate.getStartDate().get(Calendar.YEAR), mSelectedDate.getStartDate().get(Calendar.MONTH), mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH));
+                mDateSelectedListener.onDateSelected(mDate);
+            }
             dismiss();
         }
 
@@ -73,6 +84,11 @@ public class DatePicker extends DialogFragment {
     // Set activity callback
     public void setCallback(Callback callback) {
         mCallback = callback;
+    }
+
+    // Set DateListener callback
+    public void setDateListener(OnDateSelectedListener onDateSelectedListener) {
+        this.mDateSelectedListener = onDateSelectedListener;
     }
 
     @Nullable

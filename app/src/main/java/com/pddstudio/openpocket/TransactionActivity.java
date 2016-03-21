@@ -27,6 +27,8 @@ import com.pddstudio.openpocket.model.Action;
 import com.pddstudio.openpocket.utils.DatePicker;
 import com.pddstudio.pocketlibrary.OpenPocket;
 import com.pddstudio.pocketlibrary.models.Category;
+import com.pddstudio.pocketlibrary.models.Date;
+import com.pddstudio.pocketlibrary.models.Transaction;
 import com.pddstudio.pocketutils.DateUtils;
 import com.pddstudio.pocketutils.Preferences;
 
@@ -37,7 +39,7 @@ import io.inject.Injector;
 
 public class TransactionActivity extends AppCompatActivity implements View.OnClickListener,
         AmountInputFragment.InputCallback, FastAdapter.OnClickListener<CategoryItem>,
-        DatePicker.Callback {
+        DatePicker.OnDateSelectedListener {
 
     @InjectView(R.id.categoryRecyclerView)
     private RecyclerView recyclerView;
@@ -62,6 +64,10 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
 
     private List<Category> categories;
     private DatePicker datePicker;
+
+    //to store the selected user data
+    private Category category;
+    private Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +137,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         if(v.getId() == R.id.dateButton) {
             // DialogFragment to host SublimePicker
             datePicker = new DatePicker();
-            datePicker.setCallback(this);
+            datePicker.setDateListener(this);
 
             // Options
             Pair<Boolean, SublimeOptions> optionsPair = getOptions();
@@ -148,21 +154,21 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         } else if (v.getId() == R.id.floatingActionButton) {
             Log.d("TransactionActivity", "Save Date: " + dateButton.getText() + " | Category: " + categoryText.getText() + " | Amount: " + amountText.getText());
             //TODO: Add Transaction object to backend
+            //TODO: check that everything required is set
+            float amount = Float.parseFloat(amountText.getText().toString().replace(Preferences.get().getCurrencySymbol(), ""));
+            Transaction transaction = new Transaction();
+            transaction.setMoneyAmount(amount);
+            transaction.setCategory(category);
+            transaction.setTransactionDate(date);
+
         }
     }
 
     @Override
     public boolean onClick(View v, IAdapter<CategoryItem> adapter, CategoryItem item, int position) {
         categoryText.setText(item.getCategory().getCategoryName());
+        category = item.getCategory();
         return true;
-    }
-
-    @Override
-    public void onCancelled() {}
-
-    @Override
-    public void onDateSelected(String date) {
-        dateButton.setText(date);
     }
 
     // Validates & returns SublimePicker options
@@ -176,4 +182,10 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         options.setCanPickDateRange(false);
         return new Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
     }
+
+    @Override
+    public void onDateSelected(Date date) {
+        this.date = date;
+    }
+
 }
