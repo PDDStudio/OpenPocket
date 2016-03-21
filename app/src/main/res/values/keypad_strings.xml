@@ -11,5 +11,5 @@
     <string name="key_8">8</string>
     <string name="key_9">9</string>
     <string name="key_dot">.</string>
-    <string name="key_del">X</string>
+    <string name="key_del">{gmd-backspace}</string>
 </resources>

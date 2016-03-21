@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.mikepenz.iconics.view.IconicsButton;
 import com.pddstudio.openpocket.R;
 import com.pddstudio.openpocket.fragments.AmountInputFragment;
 import com.pddstudio.openpocket.model.Action;
@@ -36,7 +37,7 @@ public class AmountInputView extends RelativeLayout implements View.OnClickListe
     private Button mActionButton9;
     private Button mActionButton0;
     private Button mActionButtonDot;
-    private Button mActionButtonDel;
+    private IconicsButton mActionButtonDel;
 
     public AmountInputView(Context context) {
         super(context);
@@ -76,7 +77,7 @@ public class AmountInputView extends RelativeLayout implements View.OnClickListe
         mActionButton8 = (Button) mLayoutView.findViewById(R.id.key_btn_8);
         mActionButton9 = (Button) mLayoutView.findViewById(R.id.key_btn_9);
         mActionButtonDot = (Button) mLayoutView.findViewById(R.id.key_btn_dot);
-        mActionButtonDel = (Button) mLayoutView.findViewById(R.id.key_btn_del);
+        mActionButtonDel = (IconicsButton) mLayoutView.findViewById(R.id.key_btn_del);
         //set the onclick listeners
         mActionButton0.setOnClickListener(this);
         mActionButton1.setOnClickListener(this);
