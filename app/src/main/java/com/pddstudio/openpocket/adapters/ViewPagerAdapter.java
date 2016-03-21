@@ -38,6 +38,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return overviewFragments.length;
     }
 
+    public void reloadItemData() {
+        for(OverviewFragment overviewFragment : overviewFragments) {
+            overviewFragment.reloadItems();
+        }
+    }
+
     @Override
     public CharSequence getPageTitle(int position) {
         String title = fragmentTitles[position];

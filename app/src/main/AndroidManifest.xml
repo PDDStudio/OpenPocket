@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TransactionActivity"></activity>
+        <activity
+            android:name=".TransactionActivity"
+            android:theme="@style/AppTheme.TransactionActivity" />
     </application>
 
 </manifest>

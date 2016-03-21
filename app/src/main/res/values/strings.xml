@@ -7,4 +7,10 @@
     <!-- TransactionActivity Strings -->
     <string name="amount">Amount</string>
     <string name="category">Category</string>
+    <!-- TransactionActivity SnackBar Strings -->
+    <string name="snackbar_amount_missing">You have to enter an amount before saving</string>
+    <string name="snackbar_amount_zero">Can\'t add item with amount of 0</string>
+    <string name="snackbar_date_missing">You have to specify a date before saving</string>
+    <string name="snackbar_category_missing">You have to specify a category before saving</string>
+    <string name="snackbar_action_dismiss">Dismiss</string>
 </resources>

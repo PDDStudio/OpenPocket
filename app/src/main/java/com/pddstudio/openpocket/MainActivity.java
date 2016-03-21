@@ -165,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == ADD_TRANSACTION_CODE && resultCode == RESULT_OK) {
             Log.d("MainActivity", "Received RESULT_OK");
+            viewPagerAdapter.reloadItemData();
         }
     }
 

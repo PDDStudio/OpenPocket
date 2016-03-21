@@ -104,4 +104,17 @@ public class OverviewFragment extends Fragment implements SwipeRefreshLayout.OnR
             //TODO: handle case when refreshing and no item exist
         }
     }
+
+    public void reloadItems() {
+        if(fastItemAdapter != null) {
+            fastItemAdapter.clear();
+            transactions = OpenPocket.get().getTransactionManager().getFilteredTransactionList(DateUtils.getValueForMonth(monthName), DateUtils.getCurrentYear());
+            for(Transaction transaction : transactions) {
+                TransactionItem transactionItem = new TransactionItem(transaction);
+                fastItemAdapter.add(transactionItem);
+            }
+            //TODO: handle case when refreshing and no item exist
+        }
+    }
+
 }
