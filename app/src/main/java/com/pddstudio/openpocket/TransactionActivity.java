@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
@@ -24,6 +23,7 @@ import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.IAdapter;
 import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.iconics.view.IconicsButton;
 import com.mikepenz.itemanimators.SlideInOutLeftAnimator;
 import com.pddstudio.openpocket.adapters.items.CategoryItem;
 import com.pddstudio.openpocket.fragments.AmountInputFragment;
@@ -64,7 +64,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     private TextView categoryText;
 
     @InjectView(R.id.dateButton)
-    private Button dateButton;
+    private IconicsButton dateButton;
 
     private FastItemAdapter<CategoryItem> fastItemAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -142,7 +142,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         amountText.setText(Preferences.get().getCurrencySymbol() + "0");
 
         //set the current date to the date picker
-        dateButton.setText(DateUtils.getCurrentDate());
+        dateButton.setText("{cmd-chevron-right} " + DateUtils.getCurrentDate());
         dateButton.setOnClickListener(this);
     }
 
@@ -261,7 +261,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                 + date.getMonth()
                 + Preferences.get().getDateSeperator()
                 + date.getDay();
-        this.dateButton.setText(selDate);
+        this.dateButton.setText("{cmd-chevron-right} " +selDate);
     }
 
 }
