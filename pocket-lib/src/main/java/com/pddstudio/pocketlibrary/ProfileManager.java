@@ -15,6 +15,7 @@ import io.paperdb.Paper;
 public class ProfileManager {
 
     private static final String PROFILE_LIST = "mProfileList";
+    private static final String ACTIVE_PROFILE = "mActiveProfile";
 
     protected ProfileManager() {}
 
@@ -31,6 +32,23 @@ public class ProfileManager {
         for(int i = 0; i < profiles.size(); i++) {
             if(profile.getProfileName().equals(profiles.get(i).getProfileName())) profiles.remove(i);
         }
+    }
+
+    public Profile getActiveProfile() {
+        return Paper.book().read(ACTIVE_PROFILE, getDefaultProfile());
+    }
+
+    public void setActiveProfile(Profile profile) {
+        Paper.book().write(ACTIVE_PROFILE, profile);
+    }
+
+    private Profile getDefaultProfile() {
+        Profile profile = new Profile();
+        profile.setFixedMonthlyIncome(0);
+        profile.setProtected(false);
+        profile.setProfileName("OpenPocket");
+        profile.setProfileDescription("Default Profile");
+        return profile;
     }
 
 }

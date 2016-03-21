@@ -6,6 +6,9 @@ package com.pddstudio.pocketlibrary;
  */
 
 import android.content.Context;
+
+import com.pddstudio.pocketlibrary.models.Profile;
+
 import io.paperdb.Paper;
 
 public final class OpenPocket {
@@ -47,6 +50,14 @@ public final class OpenPocket {
 
     public TransactionManager getTransactionManager() {
         return transactionManager;
+    }
+
+    public Profile getActiveProfile() {
+        return profileManager.getActiveProfile();
+    }
+
+    public void setActiveProfile(Profile profile) {
+        profileManager.setActiveProfile(profile);
     }
 
 }
