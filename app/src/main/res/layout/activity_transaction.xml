@@ -6,7 +6,6 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="com.pddstudio.openpocket.TransactionActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -81,6 +80,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:clipToPadding="false"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
 
         <RelativeLayout
