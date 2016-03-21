@@ -10,4 +10,6 @@
     <color name="colorAccent">#FF5722</color>
     <color name="colorAccentDark">#E64A19</color>
     <color name="colorHintText">#000000</color>
+    <color name="colorTextPrimary">#DE000000</color>
+    <color name="colorTextSecondary">#8A000000</color>
 </resources>

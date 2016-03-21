@@ -63,8 +63,8 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:tabMode="scrollable"
                 app:layout_collapseMode="pin"
-                app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/colorAccentLight"/>
+                app:tabSelectedTextColor="@color/colorTextPrimary"
+                app:tabTextColor="@color/colorTextSecondary"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
