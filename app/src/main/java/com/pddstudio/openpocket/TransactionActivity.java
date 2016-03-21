@@ -167,6 +167,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                     amountText.setText(amountText.getText() + "0");
                 } else {
                     amountText.setText(amountText.getText().subSequence(0, amountText.getText().length() -1));
+                    if(amountText.getText().length() == 1) amountText.setText(amountText.getText() + "0");
                 }
                 break;
             default:
@@ -255,6 +256,12 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onDateSelected(Date date) {
         this.date = date;
+        String selDate = date.getYear()
+                + Preferences.get().getDateSeperator()
+                + date.getMonth()
+                + Preferences.get().getDateSeperator()
+                + date.getDay();
+        this.dateButton.setText(selDate);
     }
 
 }
