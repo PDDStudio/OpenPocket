@@ -152,7 +152,6 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
             datePicker.show(getSupportFragmentManager(), "SUBLIME_PICKER");
 
         } else if (v.getId() == R.id.floatingActionButton) {
-            Log.d("TransactionActivity", "Save Date: " + dateButton.getText() + " | Category: " + categoryText.getText() + " | Amount: " + amountText.getText());
             //TODO: Add Transaction object to backend
             //TODO: check that everything required is set
             float amount = Float.parseFloat(amountText.getText().toString().replace(Preferences.get().getCurrencySymbol(), ""));
@@ -160,7 +159,10 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
             transaction.setMoneyAmount(amount);
             transaction.setCategory(category);
             transaction.setTransactionDate(date);
-
+            transaction.setProfile(OpenPocket.get().getActiveProfile());
+            //OpenPocket.get().getTransactionManager().addTransaction(transaction);
+            setResult(RESULT_OK);
+            finish();
         }
     }
 

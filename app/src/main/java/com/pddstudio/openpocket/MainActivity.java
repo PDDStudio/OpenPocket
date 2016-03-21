@@ -10,6 +10,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -34,6 +35,8 @@ import io.inject.InjectView;
 import io.inject.Injector;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final int ADD_TRANSACTION_CODE = 42;
 
     private Toolbar toolbar;
     @InjectView(R.id.balanceView) private CoordinatorBalanceView coordinatorBalanceView;
@@ -124,6 +127,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         accountHeader = new AccountHeaderBuilder().withActivity(this).withHeaderBackground(R.color.colorPrimary).build();
 
+        Profile activeProfile = OpenPocket.get().getActiveProfile();
+        ProfileDrawerItem activeProfileItem = new ProfileDrawerItem().withName(activeProfile.getProfileName()).withEmail(activeProfile.getProfileDescription());
+        accountHeader.setActiveProfile(activeProfileItem);
+
         for(Profile profile : OpenPocket.get().getProfileManager().getProfileList()) {
             ProfileDrawerItem profileDrawerItem = new ProfileDrawerItem().withName(profile.getProfileName()).withEmail(profile.getProfileDescription());
             accountHeader.addProfiles(profileDrawerItem);
@@ -147,10 +154,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.floatingActionButton:
                 Intent intent = new Intent(this, TransactionActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_TRANSACTION_CODE);
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == ADD_TRANSACTION_CODE && resultCode == RESULT_OK) {
+            Log.d("MainActivity", "Received RESULT_OK");
         }
     }
 
