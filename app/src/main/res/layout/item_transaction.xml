@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     android:layout_marginBottom="8dp"
     android:layout_marginTop="8dp"
     android:clickable="true"
@@ -16,11 +17,22 @@
         android:orientation="horizontal"
         android:padding="6dp">
 
-        <com.pddstudio.openpocket.views.MLRoundedImageView
-            android:id="@+id/itemCategoryImage"
+        <FrameLayout
             android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:src="@color/colorPrimary"/>
+            android:layout_height="56dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/round_rectangle" />
+
+            <com.mikepenz.iconics.view.IconicsImageView
+                android:id="@+id/itemCategoryImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

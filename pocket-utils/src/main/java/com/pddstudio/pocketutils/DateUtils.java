@@ -57,7 +57,7 @@ public final class DateUtils {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(calendar.get(Calendar.YEAR))
                 .append(Preferences.get().getDateSeperator())
-                .append(calendar.get(Calendar.MONTH))
+                .append((calendar.get(Calendar.MONTH)+1))
                 .append(Preferences.get().getDateSeperator())
                 .append(calendar.get(Calendar.DATE));
         return stringBuilder.toString();

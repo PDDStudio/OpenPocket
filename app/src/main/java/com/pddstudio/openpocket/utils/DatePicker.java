@@ -53,12 +53,12 @@ public class DatePicker extends DialogFragment {
             mSelectedDate = selectedDate;
             String date = mSelectedDate.getStartDate().get(Calendar.YEAR)
                     + Preferences.get().getDateSeperator()
-                    + mSelectedDate.getStartDate().get(Calendar.MONTH)
+                    + (mSelectedDate.getStartDate().get(Calendar.MONTH)+1)
                     + Preferences.get().getDateSeperator()
                     + mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH);
             if(mCallback != null) mCallback.onDateSelected(date);
             if(mDateSelectedListener != null) {
-                Date mDate = new Date(mSelectedDate.getStartDate().get(Calendar.YEAR), mSelectedDate.getStartDate().get(Calendar.MONTH), mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH));
+                Date mDate = new Date(mSelectedDate.getStartDate().get(Calendar.YEAR), (mSelectedDate.getStartDate().get(Calendar.MONTH)+1), mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH));
                 mDateSelectedListener.onDateSelected(mDate);
             }
             dismiss();
